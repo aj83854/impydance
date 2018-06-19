@@ -1,4 +1,4 @@
-project-load-impedance
+project-imPydance
 ======================
 
 A simple script that takes character impedance (Zo), normalized load impedance (Zl), and wavelength (L) values as input and calculates either normalized or complex values for Input Impedance (Zin) at any point on a transmission line.
@@ -40,7 +40,7 @@ Wavelength WILL accept fractions OR decimal values; however, the script will bre
 Relevant Equation(s)
 --------------------
 
-Zin.(NORMALIZED or COMPLEX) = 
+Zin.(NORMALIZED or COMPLEX) =
  * Zin.COMPLEX = ((Zl + j*tan(bL)) / (1 + j*Zl*tan(bL))
  * Zin.NORMALIZED = Zo * Zin.COMPLEX
 
