@@ -1,5 +1,5 @@
-project-imPydance
-======================
+ImPydance
+==========
 
 A simple script that takes character impedance (Zo), normalized load impedance (Zl), and wavelength (L) values as input and calculates either normalized or complex values for Input Impedance (Zin) at any point on a transmission line.
 
@@ -65,4 +65,4 @@ Future Plans
 Not only do I intend to re-refactor it and add additional features/functionality, but, I'll most likely eventually add this into a more complex program with multiple engineering calculations.
 
 ---
-Feel free to leave constructive feedback, comments, or let me know if something is off with the math/calculations!
+*Feel free to leave constructive feedback, comments, or let me know if something is off with the math/calculations!*
