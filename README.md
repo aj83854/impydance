@@ -1,4 +1,4 @@
-ImPydance
+impydance
 ==========
 
 A simple program that takes character impedance (Zo), normalized load impedance (Zl), and wavelength (L) values as input and calculates either normalized or complex values for Input Impedance (Zin) at any point on a transmission line.
