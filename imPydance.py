@@ -1,6 +1,5 @@
 from cmath import pi, tan, cos, sin, phase, sqrt
 from fractions import Fraction
-# On specificaiton, calculates Normalized (norm) or Complex (comp) input impedence
 
 def norm_or_comp():
     """
