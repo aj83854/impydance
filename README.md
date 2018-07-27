@@ -1,24 +1,28 @@
 ImPydance
 ==========
 
-A simple script that takes character impedance (Zo), normalized load impedance (Zl), and wavelength (L) values as input and calculates either normalized or complex values for Input Impedance (Zin) at any point on a transmission line.
+A simple program that takes character impedance (Zo), normalized load impedance (Zl), and wavelength (L) values as input and calculates either normalized or complex values for Input Impedance (Zin) at any point on a transmission line.
 
 Background
 ----------
 
 This was inspired by an EE university assignment given to a colleague of mine which I am using as a learning tool for Python, as well as some basic electrical engineering mathematics.
 
-I started this project a few months back while I was in the middle of a python course, and when I came back to this I saw that it was, as expected, not only poorly written (still learning!) but also unexpectedly provided incorrect output. After re-consulting with my very bright colleague, they helped me understand the math and I spent only about an hour translating the garbage I originally typed out and refactored it into what it is now- just a single, infinitely looping conditional.
-
-It has been verified for accuracy by the student and myself; however, you should probably go ahead and double-check the math just in case.
+It has been verified for accuracy by the student and myself; however, you should probably go ahead and double-check the math just in case you decide to use this for yourself.
 
 
 What this script actually does
 ------------------------------
 
-First, a conditional runs asking if you want the output as either 'Complex' or 'Normalized'.
+The first function, norm_or_comp(), asks you if the calculation to be preformed should output complex or normalized values.
 
-Based on your selection and additional inputs for (Zo), (Zl), and (L), a calculation will run and provide either the complex load impedance value, OR the normalized value.
+The second function, impedance(comp), takes a boolean value as an arguement and calculates complex input impedance for True, and normalized input impedance for False. 
+
+You are then asked if you'd like to do another calculation, to which anything other than 'y' or 'yes' will exit the program.
+
+Note: norm_or_comp() returns a boolean value, so it can be passed in as an arguement to impedance(comp).
+
+*I had to be careful not to use 'complex' so that it did not interfere with the built-in type!*
 
 Example test cases to try:
 
@@ -62,7 +66,9 @@ Zin = [input_imp_norm, input_imp_comp] = INPUT IMPEDANCE = *EXPECTED OUTPUT*
 Future Plans
 ------------
 
-Not only do I intend to re-refactor it and add additional features/functionality, but, I'll most likely eventually add this into a more complex program with multiple engineering calculations.
+I'll most likely eventually add this into a more complex program with multiple engineering calculations, but for now, it needs:
+
+Error Handling for Blank Input
 
 ---
-*Feel free to leave constructive feedback, comments, or let me know if something is off with the math/calculations!*
+
