@@ -16,9 +16,9 @@ What this script actually does
 
 The first function, norm_or_comp(), asks you if the calculation to be preformed should output complex or normalized values.
 
-The second function, impedance(comp), takes a boolean value as an arguement and calculates complex input impedance for True, and normalized input impedance for False. 
+impedance(comp) then takes a boolean value as an arguement and calculates complex input impedance for True, and normalized input impedance for False. 
 
-You are then asked if you'd like to do another calculation, to which anything other than 'y' or 'yes' will exit the program.
+You are then asked if you'd like to run another calculation, to which anything other than 'y' or 'yes' will exit the program.
 
 Note: norm_or_comp() returns a boolean value, so it can be passed in as an arguement to impedance(comp).
 
@@ -34,12 +34,6 @@ Example test cases to try:
 
 4. cimpedance (Zo) = 50, norm_load_imp (zL) = 1, wave_len (L) = 1/2
 
-***
-*Please Note*
-
-In its current state, there is really no error handling other than the first conditional which will only process the rest of the script if 'normalized' or 'complex' is specified.
-Wavelength WILL accept fractions OR decimal values; however, the script will break if blank or string input is given to any of the value input prompts.
-***
 
 Relevant Equation(s)
 --------------------
@@ -60,15 +54,16 @@ Zl = norm_load_imp = NORMALIZED LOAD IMPEDANCE = complex() = *INPUT*
 
 L = wave_len = wavelength = float(Fraction()) = *INPUT*
 
-Zin = [input_imp_norm, input_imp_comp] = INPUT IMPEDANCE = *EXPECTED OUTPUT*
+Zin = (input_imp_norm OR input_imp_comp) = INPUT IMPEDANCE = *EXPECTED OUTPUT*
 
+
+Most recent changes
+-------------------
+- Refactored single conditional into proper functions
+- Added exception handling for blank/invalid inputs
 
 Future Plans
 ------------
 
-I'll most likely eventually add this into a more complex program with multiple engineering calculations, but for now, it needs:
-
-Error Handling for Blank Input
-
----
+I'm planning on adding additional features to this, maybe make it a module with multiple electical engineering calculations. For now, I'll continue to clean it up and make minor changes.
 
