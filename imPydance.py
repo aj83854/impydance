@@ -10,19 +10,19 @@ def norm_or_comp():
     Use to determine a normalized or complex value.
     """
     while True:
-        norm_or_comp = input("Would you like to calculate normalized "
-                             "or complex input impedance? ").lower()
-        if norm_or_comp == "complex":
+        value = input(
+            "Would you like to calculate normalized or complex input impedance? ").lower()
+        if value == "complex":
             return True
-        elif norm_or_comp == "normalized":
+        elif value == "normalized":
             return False
         else:
             print("Please type only 'normalized' or 'complex'\n")
 
 
 def character_impedance():
-    """ returns character impedance as complex value """
-    while True:    
+    """ Returns character impedance as complex value. """
+    while True:
         try:
             char_impedance = complex(
                 input("What is the character impedance, in ohms? "))
@@ -33,8 +33,8 @@ def character_impedance():
 
 
 def norm_load_impedance():
-    """ returns normalized load impedance as complex value """
-    while True:    
+    """ Returns normalized load impedance as complex value. """
+    while True:
         try:
             norm_load_imp = complex(
                 input("What is the normalized load impedance? "))
@@ -45,8 +45,8 @@ def norm_load_impedance():
 
 
 def wavelength():
-    """ returns wavelength as floating point value """
-    while True:    
+    """ Returns wavelength as floating point value. """
+    while True:
         try:
             wave_len = float(
                 Fraction(
@@ -71,11 +71,10 @@ def impedance(comp):
             norm_load_imp = norm_load_impedance()
             wave_len = wavelength()
             input_imp_comp = (1j * (tan(2 * pi * wave_len)) /
-                (((norm_load_imp.real + 1j * norm_load_imp.imag) /
-                 (cimpedance.real + cimpedance.imag)) *
-                  tan(2 * pi * wave_len)))
-            print("The complex input impedance in this case is "
-                  f"{input_imp_comp}!\n")
+                              (((norm_load_imp.real + 1j * norm_load_imp.imag) /
+                                (cimpedance.real + cimpedance.imag)) *
+                               tan(2 * pi * wave_len)))
+            print(f"The complex input impedance in this case is {input_imp_comp}!\n")
             break
     elif not comp:
         while True:
@@ -84,18 +83,16 @@ def impedance(comp):
             norm_load_imp = norm_load_impedance()
             wave_len = wavelength()
             input_imp_norm = ((cimpedance.real + cimpedance.imag) *
-                (((norm_load_imp.real + norm_load_imp.imag) /
-                 (cimpedance.real + cimpedance.imag)) +
-                  (1j * (tan(2 * pi * wave_len)) /
-                (((norm_load_imp.real + 1j * norm_load_imp.imag) /
-                 (cimpedance.real + cimpedance.imag)) *
-                  tan(2 * pi * wave_len)))))
-            print("The normalized input impedance in this case is "
-                  f"{input_imp_norm}!\n")
+                              (((norm_load_imp.real + norm_load_imp.imag) /
+                                (cimpedance.real + cimpedance.imag)) +
+                               (1j * (tan(2 * pi * wave_len)) /
+                                (((norm_load_imp.real + 1j * norm_load_imp.imag) /
+                                  (cimpedance.real + cimpedance.imag)) *
+                                 tan(2 * pi * wave_len)))))
+            print(f"The normalized input impedance in this case is {input_imp_norm}!\n")
             break
     while True:
-        run_again = input(
-            "Would you like to run another calculation? ").lower()
+        run_again = input("Would you like to run another calculation? ").lower()
         if run_again in ("y", "yes"):
             impedance(norm_or_comp())
         elif run_again in ("n", "no"):
