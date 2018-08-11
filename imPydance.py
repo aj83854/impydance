@@ -101,4 +101,5 @@ def impedance(comp):
             print("Please type either (Y)es or (N)o...\n")
 
 
-impedance(norm_or_comp())
+if __name__ == '__main__':
+    impedance(norm_or_comp())
