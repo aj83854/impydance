@@ -2,6 +2,9 @@ from cmath import pi, tan
 from fractions import Fraction
 
 
+# TODO: Change normalized or complex selection to simply 1 or 2
+
+
 def norm_or_comp():
     """
     Returns a boolean value based on user input.
@@ -66,19 +69,21 @@ def impedance(comp):
     """
     if comp:
         while True:
-            print("Calculating COMPLEX output...")
+            print("Calculating COMPLEX input impedance-")
             cimpedance = character_impedance()
             norm_load_imp = norm_load_impedance()
             wave_len = wavelength()
-            input_imp_comp = (1j * (tan(2 * pi * wave_len)) /
-                              (((norm_load_imp.real + 1j * norm_load_imp.imag) /
-                                (cimpedance.real + cimpedance.imag)) *
-                               tan(2 * pi * wave_len)))
+            input_imp_comp = ((((norm_load_imp.real + norm_load_imp.imag) /
+                                (cimpedance.real + cimpedance.imag)) +
+                               (1j * (tan(2 * pi * wave_len)) /
+                                (((norm_load_imp.real + 1j * norm_load_imp.imag) /
+                                  (cimpedance.real + cimpedance.imag)) *
+                                 tan(2 * pi * wave_len)))))
             print(f"The complex input impedance in this case is {input_imp_comp}!\n")
             break
     elif not comp:
         while True:
-            print("Calculating NORMALIZED output...")
+            print("Calculating NORMALIZED input impedance-")
             cimpedance = character_impedance()
             norm_load_imp = norm_load_impedance()
             wave_len = wavelength()
