@@ -14,13 +14,13 @@ def norm_or_comp():
     """
     while True:
         value = input(
-            "Would you like to calculate normalized or complex input impedance? ").lower()
-        if value == "complex":
-            return True
-        elif value == "normalized":
+            "Type [1] to calculate normalized input impedance, [2] for complex, or [3] to quit: ")
+        if value == "1":
             return False
-        else:
-            print("Please type only 'normalized' or 'complex'\n")
+        elif value == "2":
+            return True
+        elif value == "3":
+            quit()
 
 
 def character_impedance():
@@ -102,8 +102,6 @@ def impedance(comp):
             impedance(norm_or_comp())
         elif run_again in ("n", "no"):
             break
-        else:
-            print("Please type either (Y)es or (N)o...\n")
 
 
 if __name__ == '__main__':
