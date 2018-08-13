@@ -2,7 +2,31 @@ from cmath import pi, tan
 from fractions import Fraction
 
 
-# TODO: Change normalized or complex selection to simply 1 or 2
+class Impedance:
+
+    def __init__(self, character_imp, normalized_load_imp, wavelength, normalized=True):
+        self.character_imp = character_imp
+        self.normalized_load_imp = normalized_load_imp
+        self.wavelength = wavelength
+        self.normalized = normalized
+
+    def __repr__(self):
+        if self.normalized:
+            input_imp_norm = ((self.character_imp.real + self.character_imp.imag) *
+                              (((self.normalized_load_imp.real + self.normalized_load_imp.imag) /
+                                (self.character_imp.real + self.character_imp.imag)) +
+                               (1j * (tan(2 * pi * self.wavelength)) /
+                                (((self.normalized_load_imp.real + 1j * self.normalized_load_imp.imag) /
+                                  (self.character_imp.real + self.character_imp.imag)) *
+                                  tan(2 * pi * self.wavelength)))))
+            return str(input_imp_norm)
+        input_imp_comp = ((((self.normalized_load_imp.real + self.normalized_load_imp.imag) /
+                            (self.character_imp.real + self.character_imp.imag)) +
+                           (1j * (tan(2 * pi * self.wavelength)) /
+                            (((self.normalized_load_imp.real + 1j * self.normalized_load_imp.imag) /
+                              (self.character_imp.real + self.character_imp.imag)) *
+                             tan(2 * pi * self.wavelength)))))
+        return str(input_imp_comp)
 
 
 def norm_or_comp():
