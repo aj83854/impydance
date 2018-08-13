@@ -8,7 +8,7 @@ Background
 
 This was inspired by an EE university assignment given to a colleague of mine which I am using as a learning tool for Python, as well as some basic electrical engineering mathematics.
 
-It has been verified for accuracy by the student and myself; however, you should probably go ahead and double-check the math just in case you decide to use this for yourself.
+It has been verified for accuracy by the student and professor both; however, you should probably go ahead and independetly verify the math just in case you decide to use this for yourself.
 
 
 What this script actually does
@@ -55,15 +55,4 @@ Zl = norm_load_imp = NORMALIZED LOAD IMPEDANCE = complex() = *INPUT*
 L = wave_len = wavelength = float(Fraction()) = *INPUT*
 
 Zin = (input_imp_norm OR input_imp_comp) = INPUT IMPEDANCE = *EXPECTED OUTPUT*
-
-
-Most recent changes
--------------------
-- Refactored single conditional into proper functions
-- Added exception handling for blank/invalid inputs
-
-Future Plans
-------------
-
-I'm planning on adding additional features to this, maybe make it a module with multiple electical engineering calculations. For now, I'll continue to clean it up and make minor changes.
 
