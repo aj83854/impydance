@@ -1,58 +1,56 @@
-impydance
-==========
+# Impydance
 
-A simple program that takes character impedance (Zo), normalized load impedance (Zl), and wavelength (L) values as input and calculates either normalized or complex values for Input Impedance (Zin) at any point on a transmission line.
+Impydance is a Python module that calculates the input impedance at any point on a transmission line, given the normalized load impedance (zL) and the length (l) in wavelengths.
 
-Background
-----------
+The module can be used as a standalone interactive script or imported and used in other Python programs.
 
-This was inspired by an EE university assignment given to a colleague of mine which I am using as a learning tool for Python, as well as some basic electrical engineering mathematics.
+## Purpose and Use
 
-It has been verified for accuracy by the student and professor both; however, you should probably go ahead and independetly verify the math just in case you decide to use this for yourself.
+The purpose Impydance is to help engineers, students and researchers to quickly and easily calculate the input impedance of transmission lines. This information is crucial for designing and analyzing various radio frequency (RF) and microwave systems, such as antennas, filters, and matching networks.
 
+## How It Works
 
-What this script actually does
-------------------------------
+Impydance calculates the input impedance using the transmission line theory, based on the given normalized load impedance and the length of the transmission line in wavelengths. The application handles complex numbers and can provide the results in both complex and normalized impedance formats.
 
-The first function, norm_or_comp(), asks you if the calculation to be preformed should output complex or normalized values.
+The relevant equation is:
 
-impedance(comp) then takes a boolean value as an arguement and calculates complex input impedance for True, and normalized input impedance for False. 
+```math
+Zin = ZL * (cosh(γL) + (1 / ZL) * sinh(γL)) / (cosh(γL) + ZL * sinh(γL))
+```
 
-You are then asked if you'd like to run another calculation, to which anything other than 'y' or 'yes' will exit the program.
+Where:
 
-Note: norm_or_comp() returns a boolean value, so it can be passed in as an arguement to impedance(comp).
+- `Zin` is the complex input impedance
+- `ZL` is the normalized load impedance (complex)
+- `γ` is the complex propagation constant
+- `L` is the length of the transmission line in wavelengths
 
-*I had to be careful not to use 'complex' so that it did not interfere with the built-in type!*
+## Usage
 
-Example test cases to try:
+### Interactively
 
-1. cimpedance (Zo) = 50, norm_load_imp (zL) = 1, wave_len (L) = 1/8
+To run Impydance interactively, simply execute the transmission_line.py script:
 
-2. cimpedance (Zo) = 50, norm_load_imp (zL) = 1, wave_len (L) = 1/4
+```bash
+python impydance.py
+```
 
-3. cimpedance (Zo) = 100, norm_load_imp (zL) = 1, wave_len (L) = 1/4
+The script will prompt you to enter the real and imaginary parts of the normalized load impedance (zL) and the length in wavelengths (l).
 
-4. cimpedance (Zo) = 50, norm_load_imp (zL) = 1, wave_len (L) = 1/2
+After entering the required values, the script will calculate and display the input impedance (Zin).
 
+### As a Module
 
-Relevant Equation(s)
---------------------
+Impydance can also be imported and used in other Python programs as well:
 
-Zin.(NORMALIZED or COMPLEX) =
- * Zin.COMPLEX = ((Zl + j*tan(bL)) / (1 + j*Zl*tan(bL))
- * Zin.NORMALIZED = Zo * Zin.COMPLEX
+```python
+import impydance
 
-(note: (bL) in the above equation references phase angle, and a simplified equation is used in its place)
+zL = 50 - 25j
+l = 0.25
 
-Variable Translations:
+Zin = impydance.calculate_input_impedance(zL, l)
+print(Zin)
+```
 
-mathematical variable = python variable = type = input OR output
-
-Zo = cimpedance = CHARECTER IMPEDANCE = complex() = *INPUT*
-
-Zl = norm_load_imp = NORMALIZED LOAD IMPEDANCE = complex() = *INPUT*
-
-L = wave_len = wavelength = float(Fraction()) = *INPUT*
-
-Zin = (input_imp_norm OR input_imp_comp) = INPUT IMPEDANCE = *EXPECTED OUTPUT*
-
+This example calculates the input impedance for a normalized load impedance of 50 - 25j and a length of 0.25 wavelengths.

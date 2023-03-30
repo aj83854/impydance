@@ -1,105 +1,88 @@
-from cmath import pi, tan
-from fractions import Fraction
+"""
+Transmission Line Input Impedance Calculator
+
+This module provides functions to calculate the input impedance at any point
+on a transmission line, given the normalized load impedance (zL) and the length
+(l) in wavelengths. The module can be imported and used in other programs or
+run interactively to prompt the user for input values and display the results.
+
+Functions
+---------
+calculate_input_impedance(zL, l)
+    Calculate the input impedance at any point on a transmission line.
+get_complex_number(prompt)
+    Prompt the user to input a complex number.
+run_interactively()
+    Run the program interactively, prompting the user for input and displaying the output.
+
+Example
+-------
+To calculate the input impedance for a given zL and l:
+
+    >>> import transmission_line
+    >>> zL = 50 - 25j
+    >>> l = 0.25
+    >>> Zin = transmission_line.calculate_input_impedance(zL, l)
+    >>> print(Zin)
+    (0.016+0.00799999999999994j)
+"""
 
 
-def norm_or_comp():
+from cmath import pi, cosh, sinh
+
+
+def calculate_input_impedance(zL: complex, l: float) -> complex:
     """
-    Returns a boolean value based on user input.
-    True will be returned if 'complex' is given.
-    False will be returned if 'normalized' is given.
-    Use to determine a normalized or complex value.
+    Calculate the input impedance at any point on a transmission line.
+
+    Parameters
+    ----------
+    zL : complex
+        Normalized load impedance.
+    l : float
+        Length in wavelengths.
+
+    Returns
+    -------
+    complex
+        Normalized input impedance (Zin).
     """
-    while True:
-        value = input(
-            "Type [1] to calculate normalized input impedance, [2] for complex, or [3] to quit: ")
-        if value == "1":
-            return False
-        elif value == "2":
-            return True
-        elif value == "3":
-            quit()
+    gamma = 2j * pi * l
+    Zin = zL * (cosh(gamma) + (1 / zL) * sinh(gamma)) / (cosh(gamma) + zL * sinh(gamma))
+    return Zin
 
 
-def character_impedance():
-    """ Returns character impedance as complex value. """
-    while True:
-        try:
-            char_impedance = complex(
-                input("What is the character impedance, in ohms? "))
-        except ValueError:
-            print("Value cannot be empty or contain any letters!\n")
-        else:
-            return char_impedance
-
-
-def norm_load_impedance():
-    """ Returns normalized load impedance as complex value. """
-    while True:
-        try:
-            norm_load_imp = complex(
-                input("What is the normalized load impedance? "))
-        except ValueError:
-            print("Value cannot be empty or contain any letters!\n")
-        else:
-            return norm_load_imp
-
-
-def wavelength():
-    """ Returns wavelength as floating point value. """
-    while True:
-        try:
-            wave_len = float(
-                Fraction(
-                    input("What is the length in wavelengths? ")))
-        except ValueError:
-            print("Value cannot be empty or contain any letters!\n")
-        else:
-            return wave_len
-
-
-def impedance(comp):
+def get_complex_number(prompt: str) -> complex:
     """
-    Meant for use with norm_or_comp(), but, it will
-    also work with a boolean passed in as an argument.
-    Calculates complex input impedance for True,
-    and normalized input impedance for False arguments, respectively.
+    Prompt the user to input a complex number.
+
+    Parameters
+    ----------
+    prompt : str
+        The text to display to the user when asking for input.
+
+    Returns
+    -------
+    complex
+        The complex number entered by the user.
     """
-    if comp:
-        while True:
-            print("Calculating COMPLEX input impedance-")
-            cimpedance = character_impedance()
-            norm_load_imp = norm_load_impedance()
-            wave_len = wavelength()
-            input_imp_comp = ((((norm_load_imp.real + norm_load_imp.imag) /
-                                (cimpedance.real + cimpedance.imag)) +
-                               (1j * (tan(2 * pi * wave_len)) /
-                                (((norm_load_imp.real + 1j * norm_load_imp.imag) /
-                                  (cimpedance.real + cimpedance.imag)) *
-                                 tan(2 * pi * wave_len)))))
-            print(f"The complex input impedance in this case is {input_imp_comp}!\n")
-            break
-    elif not comp:
-        while True:
-            print("Calculating NORMALIZED input impedance-")
-            cimpedance = character_impedance()
-            norm_load_imp = norm_load_impedance()
-            wave_len = wavelength()
-            input_imp_norm = ((cimpedance.real + cimpedance.imag) *
-                              (((norm_load_imp.real + norm_load_imp.imag) /
-                                (cimpedance.real + cimpedance.imag)) +
-                               (1j * (tan(2 * pi * wave_len)) /
-                                (((norm_load_imp.real + 1j * norm_load_imp.imag) /
-                                  (cimpedance.real + cimpedance.imag)) *
-                                 tan(2 * pi * wave_len)))))
-            print(f"The normalized input impedance in this case is {input_imp_norm}!\n")
-            break
-    while True:
-        run_again = input("Would you like to run another calculation? ").lower()
-        if run_again in ("y", "yes"):
-            impedance(norm_or_comp())
-        elif run_again in ("n", "no"):
-            break
+    real = float(input(f"Enter the real part of {prompt}: "))
+    imag = float(input(f"Enter the imaginary part of {prompt}: "))
+    return real + imag * 1j
 
 
-if __name__ == '__main__':
-    impedance(norm_or_comp())
+def run_interactively():
+    """
+    Run interactively.
+    Prompts the user for input and displays the output to stdout.
+    """
+    print("This program calculates the input impedance at any point on a transmission line.")
+    
+    zL = get_complex_number("the normalized load impedance (zL)")
+    l = float(input("Enter the length in wavelengths (l): "))
+
+    Zin = calculate_input_impedance(zL, l)
+    print(f"\nThe normalized input impedance (Zin) is: {Zin}")
+
+if __name__ == "__main__":
+    run_interactively()
